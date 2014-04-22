@@ -17,7 +17,7 @@
     </custom>
     <body>
         <menu name="Getting Started">
-            <item name="Startup" href="Startup.html"/>
+            <item name="Startup" href="startup.html"/>
         </menu>
         <menu ref="reports" inherit="bottom"/>
     </body>

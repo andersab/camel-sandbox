@@ -1,3 +1,0 @@
-### Quick startup
-
-> startup.sh

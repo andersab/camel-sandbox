@@ -12,6 +12,8 @@
     <name>Camel Sandbox</name>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <camel.version>2.13.0</camel.version>
         <slf4j-api.version>1.7.6</slf4j-api.version>
     </properties>
@@ -26,7 +28,6 @@
             <artifactId>camel-spring</artifactId>
             <version>${camel.version}</version>
         </dependency>
-
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -85,7 +86,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
             <!-- allows the route to be ran via 'mvn camel:run' -->
             <plugin>
                 <groupId>org.apache.camel</groupId>
@@ -179,6 +179,23 @@
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pdf-plugin</artifactId>
+                <version>1.2</version>
+                <executions>
+                    <execution>
+                        <id>pdf</id>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>pdf</goal>
+                        </goals>
+                        <configuration>
+                            <includeReports>false</includeReports>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
