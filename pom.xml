@@ -1,82 +1,218 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ~ Copyright (c) 2011. Vantiv, LLC. All rights reserved -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<modelVersion>4.0.0</modelVersion>
- 
-<groupId>com.andersab.examples</groupId>
-<artifactId>andersab-pom</artifactId>
-<version>0.1.0-SNAPSHOT</version>
-<packaging>pom</packaging>
- 
-<name>Parent pom for configuring plantuml image generation</name>
- 
-<properties>
-<graphviz.version>2.34</graphviz.version>
-</properties>
- 
-<build>
-<plugins>
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-dependency-plugin</artifactId>
-<version>2.8</version>
-<executions>
-<execution>
-<id>unzip graphviz</id>
-<inherited>false </inherited>
-<phase>pre-site</phase>
-<goals>
-<goal>unpack</goal>
-</goals>
-</execution>
-</executions>
-<configuration>
-<artifactItems>
-<artifactItem>
-<groupId>org.graphviz</groupId>
-<artifactId>graphviz</artifactId>
-<version>${graphviz.version}</version>
-<type>zip</type>
-<classifier>win</classifier>
-</artifactItem>
-</artifactItems>
-<includes>**/*</includes>
-<outputDirectory>${project.build.directory}</outputDirectory>
-</configuration>
-</plugin>
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-surefire-plugin</artifactId>
-<version>2.7.1</version>
-<configuration>
-<forkedProcessTimeoutInSeconds>1200000</forkedProcessTimeoutInSeconds>
-</configuration>
-</plugin>
-<plugin>
-<groupId>com.github.jeluard</groupId>
-<artifactId>plantuml-maven-plugin</artifactId>
-<version>7941</version>
-<inherited>false</inherited>
-<configuration>
-<sourceFiles>
-<directory>${pom.basedir}</directory>
-<includes>
-<include>src/uml/**/*.plantuml</include>
-</includes>
-</sourceFiles>
-<graphvizDot>${project.build.directory}/graphviz-${graphviz.version}-win/bin</graphvizDot>
-<outputDirectory>${project.basedir}/src/site/resources/images</outputDirectory>
-</configuration>
-<executions>
-<execution>
-<phase>site</phase>
-<goals>
-<goal>generate</goal>
-</goals>
-</execution>
-</executions>
-</plugin>
-</plugins>
-</build>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.andersab.examples</groupId>
+    <artifactId>camel-sandbox</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Camel Sandbox</name>
+
+    <properties>
+        <graphviz.version>2.34</graphviz.version>
+    </properties>
+    <dependencies>
+        <!-- Used for site and documentation generation -->
+        <dependency>
+            <groupId>org.apache.maven.doxia</groupId>
+            <artifactId>doxia-module-markdown</artifactId>
+            <version>1.5</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.skins</groupId>
+            <artifactId>maven-fluido-skin</artifactId>
+            <version>1.3.1</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <!-- Use this if you need to install a zip version of graphviz from a repo
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.8</version>
+                <executions>
+                    <execution>
+                        <id>unzip graphviz</id>
+                        <inherited>false</inherited>
+                        <phase>pre-site</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <artifactItems>
+                        <artifactItem>
+                            <groupId>org.graphviz</groupId>
+                            <artifactId>graphviz</artifactId>
+                            <version>${graphviz.version}</version>
+                            <type>zip</type>
+                            <classifier>win</classifier>
+                        </artifactItem>
+                    </artifactItems>
+                    <includes>**/*</includes>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                </configuration>
+            </plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.7.1</version>
+                <configuration>
+                    <forkedProcessTimeoutInSeconds>1200000</forkedProcessTimeoutInSeconds>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.doxia</groupId>
+                        <artifactId>doxia-module-markdown</artifactId>
+                        <version>1.5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>com.github.jeluard</groupId>
+                <artifactId>plantuml-maven-plugin</artifactId>
+                <version>7941</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <sourceFiles>
+                        <directory>${pom.basedir}</directory>
+                        <includes>
+                            <include>src/uml/**/*.plantuml</include>
+                        </includes>
+                    </sourceFiles>
+                    <!--<graphvizDot>${project.build.directory}/graphviz-${graphviz.version}-win/bin</graphvizDot>-->
+                    <outputDirectory>${project.basedir}/src/site/resources/images</outputDirectory>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>net.sourceforge.plantuml</groupId>
+                        <artifactId>plantuml</artifactId>
+                        <version>7997</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <linkJavadoc>true</linkJavadoc>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <linkXRef>true</linkXRef>
+                    <tagListOptions>
+                        <tagClasses>
+                            <tagClass>
+                                <displayName>Todo Work</displayName>
+                                <tags>
+                                    <tag>
+                                        <matchString>TODO</matchString>
+                                        <matchType>ignoreCase</matchType>
+                                    </tag>
+                                </tags>
+                            </tagClass>
+                            <tagClass>
+                                <displayName>Work Needing Fixed</displayName>
+                                <tags>
+                                    <tag>
+                                        <matchString>FIXME</matchString>
+                                        <matchType>ignoreCase</matchType>
+                                    </tag>
+                                </tags>
+                            </tagClass>
+                        </tagClasses>
+                    </tagListOptions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.11</version>
+                <configuration>
+                    <linkXRef>true</linkXRef>
+                    <detail>true</detail>
+                </configuration>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>checkstyle</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <linkXRef>true</linkXRef>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.16</version>
+                <configuration>
+                    <linkXRef>true</linkXRef>
+                    <aggregate>true</aggregate>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>
