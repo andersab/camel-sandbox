@@ -1,0 +1,9 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <!-- here we define the bar route -->
+    <route id="StatusRoute">
+        <bean id="StatusBean" beanType="com.andersab.camel.bean.StatusProcessor" />
+        <from uri="jetty:http://0.0.0.0:8080/status?matchOnUriPrefix=true"/>
+    </route>
+    <!-- we could add more routes if we like,
+         but in this example we stick to one route only -->
+</routes>

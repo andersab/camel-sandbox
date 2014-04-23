@@ -1,6 +1,7 @@
-<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
-    <id>zip</id>
+    <id>pkg</id>
     <formats>
         <format>zip</format>
     </formats>
@@ -24,7 +25,7 @@
             <lineEnding>unix</lineEnding>
             <fileMode>0755</fileMode>
         </fileSet>
-        <!-- dependency libraries -->
+        <!-- project executable -->
         <fileSet>
             <directory>target</directory>
             <outputDirectory>lib</outputDirectory>
@@ -32,19 +33,28 @@
                 <include>*.jar</include>
             </includes>
         </fileSet>
+        <!-- creates log directory for runtime -->
+        <fileSet>
+            <outputDirectory>logs</outputDirectory>
+            <directory>src</directory>
+            <includes>
+                <include/>
+            </includes>
+        </fileSet>
+        <!-- attaches the configuration needed -->
+        <fileSet>
+            <outputDirectory>config</outputDirectory>
+            <directory>src/main/resources/config</directory>
+            <includes>
+                <include>log4j.properties</include>
+            </includes>
+        </fileSet>
     </fileSets>
-    <moduleSets>
-        <moduleSet>
-            <binaries>
-                <unpack>false</unpack>
-                <dependencySets>
-                    <dependencySet>
-                        <unpack>false</unpack>
-                        <scope>runtime</scope>
-                        <outputDirectory>lib</outputDirectory>
-                    </dependencySet>
-                </dependencySets>
-            </binaries>
-        </moduleSet>
-    </moduleSets>
+    <dependencySets>
+        <dependencySet>
+            <unpack>false</unpack>
+            <scope>runtime</scope>
+            <outputDirectory>lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
 </assembly>
