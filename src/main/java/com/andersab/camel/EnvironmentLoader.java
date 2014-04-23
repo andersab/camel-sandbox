@@ -18,11 +18,13 @@ public class EnvironmentLoader {
      *
      * @see EnvironmentLoader#LOADER_SYSTEM_PROPERTY_NAME
      */
-    public void loadProperties() throws IOException {
+    public static void loadProperties() throws IOException {
         Properties runtimeProps = new Properties();
         String runtimePropertyLocation = System.getProperty(LOADER_SYSTEM_PROPERTY_NAME);
-        InputStream propertyFileResourceStream = this.getClass().getClassLoader().getResourceAsStream(runtimePropertyLocation);
+        InputStream propertyFileResourceStream = EnvironmentLoader.class.getClassLoader().getResourceAsStream(runtimePropertyLocation);
         runtimeProps.load(propertyFileResourceStream);
         System.setProperties(runtimeProps);
     }
+
+
 }

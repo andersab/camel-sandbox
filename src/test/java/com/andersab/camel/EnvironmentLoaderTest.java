@@ -7,10 +7,6 @@ import static org.junit.Assert.assertEquals;
 
 public class EnvironmentLoaderTest {
 
-    /*@EndpointInject(uri = "mockResult")
-    protected MockEndpoint resultEndpoint;
-*/
-
     /**
      * The following will load configuration properties from the classpath
      *
@@ -22,8 +18,7 @@ public class EnvironmentLoaderTest {
         final String propertyInFile = "routesDir";
 
         System.setProperty(EnvironmentLoader.LOADER_SYSTEM_PROPERTY_NAME, configurationPropertyFile);
-        EnvironmentLoader loader = new EnvironmentLoader();
-        loader.loadProperties();
+        EnvironmentLoader.loadProperties();
         String result = System.getProperty(propertyInFile);
         assertNotNull(result);
 
