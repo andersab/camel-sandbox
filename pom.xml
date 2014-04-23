@@ -221,6 +221,11 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.andersab.camel.Startup</mainClass>
+                        </manifest>
+                    </archive>
                     <descriptor>${project.basedir}/src/assembly/package-zip.xml</descriptor>
                 </configuration>
             </plugin>
