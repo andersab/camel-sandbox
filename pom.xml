@@ -28,6 +28,11 @@
             <artifactId>camel-spring</artifactId>
             <version>${camel.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-jetty</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -48,11 +53,22 @@
         <!-- testing -->
         <dependency>
             <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
             <artifactId>camel-test-spring</artifactId>
             <version>${camel.version}</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Used for site and documentation generation -->
         <dependency>
             <groupId>org.apache.maven.doxia</groupId>
@@ -198,6 +214,15 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- This will build a zip of the runnable code -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptor>${project.basedir}/src/assembly/package-zip.xml</descriptor>
+                </configuration>
             </plugin>
         </plugins>
     </build>
