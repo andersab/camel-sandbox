@@ -16,6 +16,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <camel.version>2.13.0</camel.version>
         <slf4j-api.version>1.7.6</slf4j-api.version>
+        <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+        <build.number>${maven.build.timestamp}</build.number>
+        <release.number>000</release.number>
     </properties>
     <dependencies>
         <dependency>
@@ -48,6 +51,11 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
         <!-- testing -->
@@ -84,7 +92,31 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>${project.artifactId}-${project.version}.${release.number}</finalName>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <ArtifactName>${project.artifactId}</ArtifactName>
+                            <Version>${project.version}</Version>
+                            <VersionInfo>${project.version}.${build.number}</VersionInfo>
+                            <Build-Time>${maven.build.timestamp}</Build-Time>
+                            <Description>${project.description}</Description>
+                            <ArchiveName>${project.build.finalName}</ArchiveName>
+                        </manifestEntries>
+                        <manifest>
+                            <mainClass>com.andersab.camel.Startup</mainClass>
+                        </manifest>
+                    </archive>
+                    <excludes>
+                        <exclude>config/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -221,17 +253,19 @@
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.4</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.andersab.camel.Startup</mainClass>
-                        </manifest>
-                    </archive>
-                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                    <descriptor>${project.basedir}/src/assembly/package-zip.xml</descriptor>
+                    <finalName>${project.artifactId}-${project.version}-${release.number}</finalName>
+                    <outputDirectory>${project.basedir}/target</outputDirectory>
+                    <descriptors>
+                        <descriptor>${project.basedir}/src/assembly/package-zip.xml</descriptor>
+                    </descriptors>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>make-assembly</id>
                         <phase>package</phase>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>

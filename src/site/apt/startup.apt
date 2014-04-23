@@ -8,10 +8,13 @@ startup.sh
 Bootstrapping Properties
 
   The runtime will load a properties file based on the system property
-loaderProperties
+<loaderProperties>
+
+  << The properties file must also be added to the classpath >>
 
 * The Properties File
 
 *------------------*-----------------------------------+
-|  routesDir       | the directory to read routes from |
+|  routesXml       | the xml that defines routes from,  < must be included in claspath >|
 *------------------*-----------------------------------+
+Properties available for runtime startup
