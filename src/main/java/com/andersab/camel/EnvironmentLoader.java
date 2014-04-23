@@ -13,6 +13,13 @@ public class EnvironmentLoader {
      * The system property that the runtime properties are injected from
      */
     public static final String LOADER_SYSTEM_PROPERTY_NAME = "loaderProperties";
+
+    /**
+     * Private constructor to protect utility class
+     */
+    private EnvironmentLoader() {
+    }
+
     /**
      * Loads properties from the system property
      *
