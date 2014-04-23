@@ -226,8 +226,14 @@
                             <mainClass>com.andersab.camel.Startup</mainClass>
                         </manifest>
                     </archive>
+                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
                     <descriptor>${project.basedir}/src/assembly/package-zip.xml</descriptor>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

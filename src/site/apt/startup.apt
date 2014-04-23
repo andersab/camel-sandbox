@@ -4,3 +4,14 @@ Quick startup
 --------------
 startup.sh
 --------------
+
+Bootstrapping Properties
+
+  The runtime will load a properties file based on the system property
+loaderProperties
+
+* The Properties File
+
+*------------------*-----------------------------------+
+|  routesDir       | the directory to read routes from |
+*------------------*-----------------------------------+
