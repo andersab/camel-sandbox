@@ -1,0 +1,21 @@
+Logging
+
+  The log4j.properties files defines the current logging practices.
+
+* General practices
+
+  Current idea with logging is the following...
+
+   [[1]] Camel should have its own log
+
+   [[2]] Components should have their own log
+
+   [[3]] All errors should go to the error log, additional logging to the components is fine
+
+   [[4]] All integration points should log to the integration log
+
+* Transaction Log
+
+  Transaction log should follow the consisten pattern below for reporting through puts
+
+

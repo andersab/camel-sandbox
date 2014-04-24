@@ -19,6 +19,9 @@
         <menu name="Getting Started">
             <item name="Startup" href="startup.html"/>
         </menu>
+        <menu name="Configurations">
+            <item name="Logging" href="logging.html"/>
+        </menu>
         <menu ref="reports" inherit="bottom"/>
     </body>
 </project>

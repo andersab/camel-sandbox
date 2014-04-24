@@ -1,20 +1,30 @@
 Quick startup
 
-~~ This is a comment
---------------
-startup.sh
---------------
+* Building and Deploying
 
-Bootstrapping Properties
+  After checking out the code, you only need to do a
 
-  The runtime will load a properties file based on the system property
-<loaderProperties>
+-------------------------------
+    mvn clean package
+-------------------------------
 
-  << The properties file must also be added to the classpath >>
+  This will produce a zip file in target that can be uncompressed
 
-* The Properties File
+------------------------------------------------------
+    unzip target/camel-sandbox-...  <location>
+------------------------------------------------------
 
-*------------------*-----------------------------------+
-|  routesXml       | the xml that defines routes from,  < must be included in claspath >|
-*------------------*-----------------------------------+
-Properties available for runtime startup
+* Starting
+
+  After unzipping, you should see a directory called _camel-sandbox_
+
+------------------------------------------------------
+    +camel-sandbox
+    | bin - directory contains executable scripts
+    | lib - where all library dependencies live
+    | config - configuration properties
+    | logs - logs should be written to here
+------------------------------------------------------
+
+  << Currently the run script expects to be in < /tmp/camel-sandbox > >> \
+  To change you can edit the < APP_HOME > property in the run.sh script

@@ -10,6 +10,7 @@
 
     <toc name="Table of Contents">
         <item name="Startup" ref="startup.apt"/>
+        <item name="Logging" ref="logging.apt"/>
         <!--<item name="Filtering Document Descriptor" ref="examples/filtering.apt"/>
         <item name="Configuring Reports" ref="/examples/configuring-reports.xml.vm"/>
         <item name="Limitations" ref="limitations.apt"/>
