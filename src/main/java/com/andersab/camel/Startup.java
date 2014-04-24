@@ -1,11 +1,8 @@
 package com.andersab.camel;
 
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.main.Main;
-
-import java.util.List;
 
 public class Startup {
 
