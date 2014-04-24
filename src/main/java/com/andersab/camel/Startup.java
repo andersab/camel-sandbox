@@ -1,7 +1,11 @@
 package com.andersab.camel;
 
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.main.Main;
+
+import java.util.List;
 
 public class Startup {
 
@@ -32,6 +36,12 @@ public class Startup {
     private void boot() throws Exception {
         camelMain = new Main();
         camelMain.enableHangupSupport();
+        DefaultCamelContext loaderContext = new DefaultCamelContext();
+
+//        EnvironmentLoader.loadProperties();
+//        EnvironmentLoader.loadRoutes(loaderContext);
+        camelMain.getCamelContexts().add(loaderContext);
+
         camelMain.run();
     }
 }
