@@ -211,16 +211,9 @@
                             <include>src/uml/**/*.plantuml</include>
                         </includes>
                     </sourceFiles>
-                    <!--<graphvizDot>${project.build.directory}/graphviz-${graphviz.version}-win/bin</graphvizDot>-->
+                    <graphvizDot>/usr/bin/dot</graphvizDot>
                     <outputDirectory>${project.basedir}/src/site/resources/images</outputDirectory>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sourceforge.plantuml</groupId>
-                        <artifactId>plantuml</artifactId>
-                        <version>7997</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <phase>site</phase>
