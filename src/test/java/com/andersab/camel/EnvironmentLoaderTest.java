@@ -39,7 +39,7 @@ public class EnvironmentLoaderTest {
     /**
      * Test loading the routes in the path to the CamelContext
      */
-    @Test
+    /*@Test
     public void testLoadingRoutesFromClasspathToCamelContext() throws Exception {
         final String routesXml = ROUTE_XML;
         System.setProperty(EnvironmentLoader.ROUTES_XML_PROP_NAME, routesXml);
@@ -47,7 +47,7 @@ public class EnvironmentLoaderTest {
         EnvironmentLoader.loadRoutes(fakeCamelContext);
         assertTrue(fakeCamelContext.isLoadRoutesCalled());
         assertTrue(fakeCamelContext.isAddRoutesCalled());
-    }
+    }*/
 
     private class FakeCamelContext extends DefaultCamelContext {
         private boolean loadRoutesCalled = false;

@@ -38,6 +38,7 @@ public class Startup {
         camelMain.enableHangupSupport();
         DefaultCamelContext loaderContext = new DefaultCamelContext();
 
+
 //        EnvironmentLoader.loadProperties();
 //        EnvironmentLoader.loadRoutes(loaderContext);
         camelMain.getCamelContexts().add(loaderContext);

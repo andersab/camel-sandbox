@@ -26,11 +26,8 @@
             <artifactId>camel-core</artifactId>
             <version>${camel.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring</artifactId>
-            <version>${camel.version}</version>
-        </dependency>
+
+        <!-- Camel Components -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jetty</artifactId>
@@ -66,12 +63,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-test-spring</artifactId>
-            <version>${camel.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
@@ -92,7 +83,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>${project.artifactId}-${project.version}.${release.number}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -140,37 +131,6 @@
                 <artifactId>camel-maven-plugin</artifactId>
                 <version>${camel.version}</version>
             </plugin>
-
-            <!-- Use this if you need to install a zip version of graphviz from a repo
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.8</version>
-                <executions>
-                    <execution>
-                        <id>unzip graphviz</id>
-                        <inherited>false</inherited>
-                        <phase>pre-site</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <artifactItems>
-                        <artifactItem>
-                            <groupId>org.graphviz</groupId>
-                            <artifactId>graphviz</artifactId>
-                            <version>${graphviz.version}</version>
-                            <type>zip</type>
-                            <classifier>win</classifier>
-                        </artifactItem>
-                    </artifactItems>
-                    <includes>**/*</includes>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-                </configuration>
-            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
