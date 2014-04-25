@@ -1,6 +1,8 @@
 package com.andersab.camel;
 
 
+import com.andersab.camel.routes.StatusRouteBuilder;
+import com.andersab.camel.util.LogUtil;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.main.Main;
 
@@ -34,12 +36,20 @@ public class Startup {
         camelMain = new Main();
         camelMain.enableHangupSupport();
         DefaultCamelContext loaderContext = new DefaultCamelContext();
-
+        try {
+            loaderContext.addRoutes(new StatusRouteBuilder());
 
 //        EnvironmentLoader.loadProperties();
 //        EnvironmentLoader.loadRoutes(loaderContext);
-        camelMain.getCamelContexts().add(loaderContext);
+            camelMain.getCamelContexts().add(loaderContext);
 
-        camelMain.run();
+            camelMain.run();
+        } catch (Exception e) {
+            LogUtil.logError("Startup", e, "Unable to startup");
+            camelMain.shutdown();
+        }
+        finally {
+            camelMain = null;
+        }
     }
 }
